@@ -3,14 +3,15 @@ import pandas as pd
 from tb import store,list
 from datetime import datetime
 
-def multi_yahoo(tickers,start,end):
+def multi_yahoo(tickers,start,end,show_progress=False):
     cotizaciones=[]
     for ticker in tickers:
         datos=yf.Ticker(ticker)
         historico=datos.history(start=start,end=end)
         reg=[ticker,historico]
         cotizaciones.append(reg)
-        print(ticker)
+        if show_progress==True:
+            print("cargado "+ticker)
     return cotizaciones
 
 def unificar(cotizaciones):
